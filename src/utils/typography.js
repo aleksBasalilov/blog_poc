@@ -12,7 +12,7 @@ const options = {
   overrideStyles: ({ rhythm, scale }, options) => {
     return {
       "h1,h2,h3,h4": {
-        lineHeight: 1.2,
+        lineHeight: 1.3,
       },
       [TABLET_MEDIA_QUERY]: {
         // Make baseFontSize on mobile 17px.
