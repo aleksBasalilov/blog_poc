@@ -13,11 +13,11 @@ class ArticleTemplate extends React.Component {
   render() {
     const product = this.props.data.contentfulProduct
     const {
-      articleName: { articleName },
+      productName: { productName },
       productDescription,
       image,
       brand,
-      subjects,
+      categories,
     } = product
     return (
       <div>
@@ -28,10 +28,10 @@ class ArticleTemplate extends React.Component {
           }}
         >
           <Img resolutions={image[0].resolutions} />
-          <h4>{articleName}</h4>
+          <h4> {productName}</h4>
         </div>
-        <h1>{articleName}</h1>
-        <h4>Made by {brand.companyName.companyName}</h4>
+        <h1>Review of the {productName}</h1>
+        <h4>Contributor by {brand.companyName.companyName}</h4>
         <div>
           <div
             dangerouslySetInnerHTML={{
@@ -39,16 +39,6 @@ class ArticleTemplate extends React.Component {
             }}
           />
           <div>
-            <span>See other: </span>
-            <ul>
-              {subjects.map((category, i) => (
-                <li key={i}>
-                  <Link key={i} to={`/subjects/${category.id}`}>
-                    {category.title.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
       </div>
@@ -63,8 +53,8 @@ export default ArticleTemplate
 export const pageQuery = graphql`
   query productQuery($id: String!) {
     contentfulProduct(id: { eq: $id }) {
-      articleName {
-        articleName
+      productName {
+        productName
       }
       productDescription {
         childMarkdownRemark {
@@ -86,7 +76,7 @@ export const pageQuery = graphql`
           companyName
         }
       }
-      subjects {
+      categories {
         id
         title {
           title

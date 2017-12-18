@@ -33,7 +33,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         }
 
         // Create Product pages
-        const productTemplate = path.resolve(`./src/templates/product.js`)
+        const productTemplate = path.resolve(`./src/templates/Article.js`)
         // We want to create a detailed page for each
         // product node. We'll just use the Contentful id for the slug.
         _.each(result.data.allContentfulProduct.edges, edge => {
@@ -45,7 +45,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             // as a template component. The `context` is
             // optional but is often necessary so the template
             // can query data specific to each page.
-            path: `/products/${edge.node.id}/`,
+            path: `/article/${edge.node.id}/`,
             component: slash(productTemplate),
             context: {
               id: edge.node.id,
@@ -72,7 +72,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
           }
 
           // Create Category pages
-          const categoryTemplate = path.resolve(`./src/templates/category.js`)
+          const categoryTemplate = path.resolve(`./src/templates/NewsFeed.js`)
           // We want to create a detailed page for each
           // category node. We'll just use the Contentful id for the slug.
           _.each(result.data.allContentfulCategory.edges, edge => {
@@ -84,7 +84,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
               // as a template component. The `context` is
               // optional but is often necessary so the template
               // can query data specific to each page.
-              path: `/categories/${edge.node.id}/`,
+              path: `/newsfeed/${edge.node.id}/`,
               component: slash(categoryTemplate),
               context: {
                 id: edge.node.id,

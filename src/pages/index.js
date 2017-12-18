@@ -8,11 +8,11 @@ const propTypes = {
   data: PropTypes.object.isRequired
 };
 
-const Product = ({ node }) => (
+const BlogArticle = ({ node }) => (
   <div>
     <Link
       style={{ color: `inherit`, textDecoration: `none` }}
-      to={`/products/${node.id}/`}
+      to={`/article/${node.id}/`}
     >
       <div
         style={{
@@ -31,7 +31,7 @@ const Product = ({ node }) => (
             />
           )}
         </div>
-        <div style={{ flex: 1 }}>{node.productName.productName}</div>
+        <div style={{ flex: 1 }}>Review {node.productName.productName}</div>
       </div>
     </Link>
   </div>
@@ -48,7 +48,7 @@ class IndexPage extends React.Component {
           HDub Blog POC using Contentful as a data source for a Gatsby site{" "}
         </h3>
         {usProductEdges.map(({ node }, i) => (
-          <Product node={node} key={node.id} />
+          <BlogArticle node={node} key={node.id} />
         ))}
         <br />
         <br />
@@ -62,21 +62,36 @@ IndexPage.propTypes = propTypes;
 export default IndexPage;
 
 export const pageQuery = graphql`
-  query PageQuery {
-    us: allContentfulProduct(filter: { node_locale: { eq: "en-US" } }) {
-      edges {
-        node {
-          id
-          productName {
-            productName
-          }
-          image {
-            resolutions(width: 75) {
-              ...GatsbyContentfulResolutions
-            }
+query PageQuery {
+  us: allContentfulProduct(filter: { node_locale: { eq: "en-US" } }) {
+    edges {
+      node {
+        id
+        productName {
+          productName
+        }
+        image {
+          resolutions(width: 75) {
+            ...GatsbyContentfulResolutions
           }
         }
       }
     }
   }
-`;
+  german: allContentfulProduct(filter: { node_locale: { eq: "de" } }) {
+    edges {
+      node {
+        id
+        productName {
+          productName
+        }
+        image {
+          resolutions(width: 75) {
+            ...GatsbyContentfulResolutions
+          }
+        }
+      }
+    }
+  }
+}
+`

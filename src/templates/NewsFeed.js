@@ -14,6 +14,7 @@ class NewsFeed extends React.Component {
     const category = this.props.data.contentfulCategory
     const { title: { title }, product, icon } = category
     const iconImg = icon.resolutions
+    console.log('here')
     return (
       <div>
         <div
